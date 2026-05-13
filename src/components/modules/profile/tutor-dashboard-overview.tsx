@@ -113,12 +113,13 @@ export function TutorDashboardOverview() {
   const totalReviews = profile?.tutorProfile?.totalReviews ?? 24;
   const hourlyRate = profile?.tutorProfile?.hourlyRate ?? "45.00";
 
+  const now = Date.now();
   const upcoming =
     (bookings ?? [])
       .filter((b) => b.status === "confirmed")
       .filter((b) => {
         const start = new Date(`${b.date}T${b.startTime}:00Z`).getTime();
-        return Number.isFinite(start) ? start > Date.now() : true;
+        return Number.isFinite(start) ? start > now : true;
       })
       .slice(0, 3) ?? [];
 
@@ -155,7 +156,7 @@ export function TutorDashboardOverview() {
               asChild
               className="border-0 bg-amber-500 text-[#0f1f3d] shadow-sm hover:bg-amber-400"
             >
-              <Link href="/tutor/availability">Manage availability</Link>
+              <Link href="/coach/availability">Manage availability</Link>
             </Button>
           }
         />

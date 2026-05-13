@@ -3,7 +3,7 @@ import { TutorReviewsDashboardPage } from "@/components/modules/tutor/tutor-revi
 
 export default function TutorReviewsPage() {
   return (
-    <ProtectedRoute roles={["TUTOR"]}>
+    <ProtectedRoute roles={["COACH"]}>
       <TutorReviewsDashboardPage />
     </ProtectedRoute>
   );

@@ -5,25 +5,37 @@ import type { MenuItem, NavbarAuth, NavbarLogo } from "@/types/navbar";
 export const defaultNavbarLogo: NavbarLogo = {
   url: "/",
   src: "/logo/logo-light.png",
-  alt: "SkillBridge logo",
-  title: "SkillBridge",
+  alt: "MindNest AI logo",
+  title: "MindNest AI",
 };
 
 export const defaultNavbarMenu: MenuItem[] = [
-  { title: "Home", url: "#" },
-
+  { title: "Home", url: "/" },
   {
-    title: "Categories",
-    url: "/categories",
+    title: "Discover",
+    url: "/coaches",
+    items: [
+      {
+        title: "Coaches",
+        url: "/coaches",
+        description: "Search, filter, and book verified coaches.",
+      },
+      {
+        title: "Subjects",
+        url: "/subjects",
+        description: "Explore what you can learn next.",
+      },
+      {
+        title: "Categories",
+        url: "/categories",
+        description: "Browse curated topic groups.",
+      },
+    ],
   },
-  {
-    title: "Tutors",
-    url: "/tutors",
-  },
-  {
-    title: "Subjects",
-    url: "/subjects",
-  },
+  { title: "About", url: "/about" },
+  { title: "Blog", url: "/blog" },
+  { title: "Help", url: "/help" },
+  { title: "Contact", url: "/contact" },
 ];
 
 export const defaultNavbarAuth: NavbarAuth = {

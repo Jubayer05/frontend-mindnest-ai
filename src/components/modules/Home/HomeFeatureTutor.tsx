@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
@@ -68,12 +69,12 @@ const subjectColors: Record<number, string> = {
 };
 
 export function HomeFeatureTutor({
-  title = "Featured tutors",
-  description = "Learn from experienced instructors across design, development, marketing, and more.",
+  title = "Featured coaches",
+  description = "Book practitioners across design, engineering, leadership, and more—with transparent rates and verified reviews.",
   tutors: tutorsProp,
   limit = MAX_VISIBLE_TUTORS,
-  viewMoreHref = "/tutors",
-  viewMoreLabel = "Browse all tutors",
+  viewMoreHref = "/coaches",
+  viewMoreLabel = "Browse all coaches",
   className,
 }: HomeFeatureTutorProps) {
   const fetchLimit = Math.min(limit, MAX_VISIBLE_TUTORS);
@@ -178,10 +179,11 @@ export function HomeFeatureTutor({
               const inner = (
                 <>
                   <div className="relative aspect-5/4 w-full overflow-hidden rounded-t-xl bg-muted/50">
-                    <img
+                    <Image
                       src={tutor.avatar}
                       alt=""
-                      className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-105"
+                      fill
+                      className="object-cover transition-transform group-hover:scale-105"
                     />
                     {/* Gradient bar at bottom of image */}
                     <div
@@ -236,7 +238,7 @@ export function HomeFeatureTutor({
               return tutor.userId ? (
                 <Link
                   key={tutor.id}
-                  href={`/tutors/${encodeURIComponent(tutor.userId)}`}
+                  href={`/coaches/${encodeURIComponent(tutor.userId)}`}
                   className={cardClassName}
                 >
                   {inner}

@@ -47,10 +47,10 @@ function BookingCard({
   onChanged,
 }: {
   booking: Booking;
-  role: "STUDENT" | "TUTOR" | "ADMIN";
+  role: "MEMBER" | "COACH" | "ADMIN";
   onChanged: (next: Booking) => void;
 }) {
-  const tutorName = booking.tutor?.name ?? "Tutor";
+  const tutorName = booking.tutor?.name ?? "Coach";
   const tutorImage =
     booking.tutor?.profileImageUrl ?? booking.tutor?.image ?? null;
   const subjectName = booking.subject?.name ?? "Subject";
@@ -58,11 +58,11 @@ function BookingCard({
 
   const canCancel =
     booking.status === "confirmed" &&
-    (role === "STUDENT" || role === "TUTOR" || role === "ADMIN");
-  const canComplete = booking.status === "confirmed" && role === "TUTOR";
+    (role === "MEMBER" || role === "COACH" || role === "ADMIN");
+  const canComplete = booking.status === "confirmed" && role === "COACH";
   const reviewId = booking.reviewId ?? null;
   const canLeaveReview =
-    role === "STUDENT" && booking.status === "completed" && reviewId === null;
+    role === "MEMBER" && booking.status === "completed" && reviewId === null;
 
   const [reviewOpen, setReviewOpen] = useState(false);
 
@@ -124,7 +124,7 @@ function BookingCard({
               <div className="min-w-0">
                 <p className="truncate text-sm font-medium">{tutorName}</p>
                 <p className="text-muted-foreground truncate text-xs">
-                  {booking.tutor?.headline ?? "Tutor session"}
+                  {booking.tutor?.headline ?? "Coaching session"}
                 </p>
               </div>
             </div>
@@ -220,7 +220,7 @@ function BookingCard({
 
 export function BookingsDashboardPage() {
   const { user } = useAuth();
-  const role = (user?.role ?? "STUDENT") as "STUDENT" | "TUTOR" | "ADMIN";
+  const role = (user?.role ?? "MEMBER") as "MEMBER" | "COACH" | "ADMIN";
 
   const [status, setStatus] = useState<BookingStatus | "all">("all");
   const [from, setFrom] = useState<string>("");
@@ -268,9 +268,9 @@ export function BookingsDashboardPage() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Bookings</h1>
           <p className="text-muted-foreground text-sm">
-            {role === "TUTOR"
+            {role === "COACH"
               ? "Sessions you’re teaching and their status."
-              : "Your booked tutoring sessions and payment details."}
+              : "Your booked coaching sessions and payment details."}
           </p>
         </div>
       </div>

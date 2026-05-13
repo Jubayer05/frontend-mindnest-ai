@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { loginUser } from "@/services/auth";
 import type { AuthSessionInfo, AuthUser } from "@/types/auth";
 import { DemoLoginButtons } from "./demo-login-buttons";
+import { SocialAuthButtons } from "./social-auth-buttons";
 
 const loginSchema = z.object({
   email: z
@@ -49,7 +50,7 @@ export function LoginForm() {
         const session = res.data?.session as AuthSessionInfo | null | undefined;
         setAuth(user, session?.expiresAt ?? null);
         toast.success(`Welcome back, ${user.name}!`);
-        router.push(user.role === "TUTOR" ? "/tutor/dashboard" : "/dashboard");
+        router.push(user.role === "COACH" ? "/coach/dashboard" : "/dashboard");
       })
       .catch((error: Error) => {
         toast.error(error.message ?? "Login failed. Please try again.");
@@ -69,6 +70,7 @@ export function LoginForm() {
       </div>
 
       <DemoLoginButtons setValue={setValue} />
+      <SocialAuthButtons />
 
       {/* Fields */}
       <div className="grid gap-5">

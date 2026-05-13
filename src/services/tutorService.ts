@@ -27,7 +27,7 @@ export async function listFeaturedTutors(
     { method: "GET" },
   );
   if (!res.data) {
-    throw new Error("Featured tutors were not returned");
+    throw new Error("Featured coaches were not returned");
   }
   return res.data;
 }

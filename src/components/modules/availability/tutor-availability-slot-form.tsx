@@ -180,7 +180,7 @@ export function TutorAvailabilitySlotForm({
         .then((created) => {
           rememberAvailabilitySlot(created);
           toast.success("Availability slot created");
-          router.push(`/tutor/availability/${created.id}`);
+          router.push(`/coach/availability/${created.id}`);
         })
         .catch((err: Error) => {
           toast.error(err.message ?? "Could not create slot");

@@ -19,9 +19,9 @@ export function SessionExpiredRedirect() {
       router.push("/auth/login");
       router.refresh();
     };
-    window.addEventListener("skillbridge:session-expired", onExpired);
+    window.addEventListener("mindnest:session-expired", onExpired);
     return () =>
-      window.removeEventListener("skillbridge:session-expired", onExpired);
+      window.removeEventListener("mindnest:session-expired", onExpired);
   }, [router]);
 
   return null;

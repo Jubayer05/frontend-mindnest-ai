@@ -6,6 +6,12 @@ const backendOrigin =
   "http://localhost:4000";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      { source: "/tutors", destination: "/coaches", permanent: false },
+      { source: "/tutors/:path*", destination: "/coaches/:path*", permanent: false },
+    ];
+  },
   async rewrites() {
     return [
       {

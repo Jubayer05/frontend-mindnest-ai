@@ -13,7 +13,7 @@ export default function SubjectsPage({
   categoryId?: string;
 }) {
   const { user } = useAuth();
-  const canManage = user?.role === "ADMIN" || user?.role === "TUTOR";
+  const canManage = user?.role === "ADMIN" || user?.role === "COACH";
   const { category: filterCategory } = useCategoryById(categoryId ?? "");
 
   return (
@@ -49,8 +49,8 @@ export default function SubjectsPage({
               </h1>
               <p className="text-[15px] font-light leading-relaxed text-white/70">
                 {categoryId
-                  ? "Tutors and courses organized under this category."
-                  : "Browse every subject on SkillBridge and discover who teaches what."}
+                  ? "Coaches and sessions organized under this category."
+                  : "Browse every subject on MindNest AI and discover which coaches teach it."}
               </p>
             </div>
             {canManage ? (

@@ -17,7 +17,7 @@ export default function ResetPasswordPage() {
 
       <AuthSidePanel
         title="Create a new password."
-        description="Choose a strong password to keep your SkillBridge account secure."
+        description="Choose a strong password to keep your MindNest AI account secure."
       />
     </div>
   );

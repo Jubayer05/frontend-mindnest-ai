@@ -25,6 +25,12 @@ function humanizeSegment(segment: string): string {
     .join(" ");
 }
 
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+function isUuid(value: string): boolean {
+  return UUID_RE.test(value);
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const segments = (pathname ?? "").split("/").filter(Boolean);
@@ -33,11 +39,6 @@ export function SiteHeader() {
   const [resolvedLabels, setResolvedLabels] = useState<Record<string, string>>(
     {},
   );
-
-  const isUuid = (value: string) =>
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-      value,
-    );
 
   useEffect(() => {
     let active = true;

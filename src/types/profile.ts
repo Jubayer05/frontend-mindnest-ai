@@ -24,7 +24,7 @@ export interface UserProfile {
   phoneNumber: string | null;
   bio: string | null;
   image: string | null;
-  role: "ADMIN" | "TUTOR" | "STUDENT";
+  role: "ADMIN" | "COACH" | "MEMBER";
   isActive: boolean;
   emailVerified: boolean;
   createdAt: string;
@@ -39,7 +39,7 @@ export interface PublicTutorProfile extends TutorProfile {
     email: string;
     phoneNumber: string | null;
     image: string | null;
-    role: "ADMIN" | "TUTOR" | "STUDENT";
+    role: "ADMIN" | "COACH" | "MEMBER";
   };
 }
 

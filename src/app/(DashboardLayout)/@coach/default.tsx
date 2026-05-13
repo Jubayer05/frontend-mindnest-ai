@@ -25,7 +25,7 @@ export default function TutorDefaultPage() {
               asChild
               className="border-0 bg-amber-500 text-[#0f1f3d] shadow-sm hover:bg-amber-400"
             >
-              <Link href="/tutor/availability">Open availability</Link>
+              <Link href="/coach/availability">Open availability</Link>
             </Button>
           }
         />

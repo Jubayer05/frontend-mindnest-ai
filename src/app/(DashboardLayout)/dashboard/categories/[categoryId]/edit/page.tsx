@@ -3,7 +3,7 @@ import EditCategoryPage from "@/views/categories/EditCategoryPage";
 
 export default function Page() {
   return (
-    <ProtectedRoute roles={["ADMIN", "TUTOR"]}>
+    <ProtectedRoute roles={["ADMIN", "COACH"]}>
       <EditCategoryPage />
     </ProtectedRoute>
   );

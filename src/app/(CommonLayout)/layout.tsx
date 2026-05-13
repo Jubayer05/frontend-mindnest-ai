@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 export default function CommonLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col min-h-screen max-w-7xl mx-auto">
+    <div className="flex min-h-screen w-full flex-col">
       <Navbar />
       <main>{children}</main>
       <Footer />

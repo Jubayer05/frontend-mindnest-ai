@@ -1,4 +1,4 @@
-export type Role = "ADMIN" | "TUTOR" | "STUDENT";
+export type Role = "ADMIN" | "COACH" | "MEMBER";
 
 export interface AuthUser {
   id: string;
@@ -13,7 +13,7 @@ export interface RegisterPayload {
   name: string;
   email: string;
   password: string;
-  role: Extract<Role, "STUDENT" | "TUTOR">;
+  role: Extract<Role, "MEMBER" | "COACH">;
 }
 
 export interface LoginPayload {

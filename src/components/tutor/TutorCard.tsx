@@ -33,7 +33,7 @@ export function TutorDiscoveryCard({
   tutor: TutorListItem;
   variant?: "grid" | "list";
 }) {
-  const href = `/tutors/${encodeURIComponent(tutor.userId)}`;
+  const href = `/coaches/${encodeURIComponent(tutor.userId)}`;
   const r = ratingNum(tutor.rating);
   const img = avatarUrl(tutor);
 
@@ -169,7 +169,7 @@ export function TutorDiscoveryCard({
 
 /** Compact card for category / subject “tutors with slots” lists. */
 export default function TutorCard({ tutor }: { tutor: TutorProfileSummary }) {
-  const href = `/tutors/${encodeURIComponent(tutor.userId)}`;
+  const href = `/coaches/${encodeURIComponent(tutor.userId)}`;
   const r = ratingNum(tutor.rating);
   const img =
     tutor.profileImageUrl?.trim() ||

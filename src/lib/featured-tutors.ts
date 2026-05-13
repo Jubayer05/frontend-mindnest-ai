@@ -47,7 +47,7 @@ export async function fetchFeaturedTutorsForHome(
   ).replace(/\/$/, "");
 
   try {
-    const res = await fetch(`${base}/tutor/featured?limit=${limit}`, {
+    const res = await fetch(`${base}/coach/featured?limit=${limit}`, {
       cache: "no-store",
     });
     if (!res.ok) {

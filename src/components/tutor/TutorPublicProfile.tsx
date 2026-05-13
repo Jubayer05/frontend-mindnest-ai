@@ -68,7 +68,7 @@ export function TutorPublicProfile({ tutorUserId }: { tutorUserId: string }) {
             {error ?? "This tutor does not have a public profile yet."}
           </p>
           <Link
-            href="/tutors"
+            href="/coaches"
             className="inline-flex items-center gap-2 text-[13px] font-medium text-[#0f1f3d] border border-[#e4e1d8] bg-white px-4 py-2 rounded-lg hover:border-[#0f1f3d] transition-colors"
           >
             <ArrowLeft className="size-3.5" /> Browse tutors
@@ -166,13 +166,13 @@ export function TutorPublicProfile({ tutorUserId }: { tutorUserId: string }) {
             {/* CTA buttons */}
             <div className="flex gap-2.5 flex-shrink-0 self-start md:self-end">
               <Link
-                href={`/tutors/${encodeURIComponent(tutorUserId)}/slots`}
+                href={`/coaches/${encodeURIComponent(tutorUserId)}/slots`}
                 className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-[#0f1f3d] font-semibold text-[13px] px-5 py-2.5 rounded-lg transition-colors shadow-sm tracking-wide"
               >
                 <CalendarDays className="size-4" /> Book session
               </Link>
               <Link
-                href={`/tutors/${encodeURIComponent(tutorUserId)}/slots`}
+                href={`/coaches/${encodeURIComponent(tutorUserId)}/slots`}
                 className="inline-flex items-center gap-2 border border-white/25 hover:border-white/50 text-white text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors"
               >
                 View availability
@@ -304,13 +304,13 @@ export function TutorPublicProfile({ tutorUserId }: { tutorUserId: string }) {
               Free cancellation up to 24h before
             </p>
             <Link
-              href={`/tutors/${encodeURIComponent(tutorUserId)}/slots`}
+              href={`/coaches/${encodeURIComponent(tutorUserId)}/slots`}
               className="block w-full bg-amber-400 hover:bg-amber-300 text-[#0f1f3d] font-semibold text-[13px] py-2.5 rounded-lg transition-colors tracking-wide text-center"
             >
               Book a session
             </Link>
             <Link
-              href={`/tutors/${encodeURIComponent(tutorUserId)}/slots`}
+              href={`/coaches/${encodeURIComponent(tutorUserId)}/slots`}
               className="block w-full mt-2 border border-white/20 hover:border-white/40 text-white text-[13px] font-medium py-2.5 rounded-lg transition-colors text-center"
             >
               View availability

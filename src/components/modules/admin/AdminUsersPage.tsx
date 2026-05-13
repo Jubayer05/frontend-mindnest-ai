@@ -35,7 +35,7 @@ import { toast } from "sonner";
 
 function roleBadgeVariant(role: Role): "default" | "secondary" | "outline" {
   if (role === "ADMIN") return "default";
-  if (role === "TUTOR") return "secondary";
+  if (role === "COACH") return "secondary";
   return "outline";
 }
 
@@ -47,7 +47,7 @@ export function AdminUsersPage() {
   const [q, setQ] = useState("");
   const [qInput, setQInput] = useState("");
   const [editUser, setEditUser] = useState<AdminUser | null>(null);
-  const [editRole, setEditRole] = useState<Role>("STUDENT");
+  const [editRole, setEditRole] = useState<Role>("MEMBER");
   const [editBanned, setEditBanned] = useState(false);
   const [banReason, setBanReason] = useState("");
   const [editActive, setEditActive] = useState(true);
@@ -175,8 +175,8 @@ export function AdminUsersPage() {
             <SelectContent>
               <SelectItem value="all">All roles</SelectItem>
               <SelectItem value="ADMIN">Admin</SelectItem>
-              <SelectItem value="TUTOR">Tutor</SelectItem>
-              <SelectItem value="STUDENT">Student</SelectItem>
+              <SelectItem value="COACH">Coach</SelectItem>
+              <SelectItem value="MEMBER">Member</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -298,8 +298,8 @@ export function AdminUsersPage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="STUDENT">Student</SelectItem>
-                    <SelectItem value="TUTOR">Tutor</SelectItem>
+                    <SelectItem value="MEMBER">Member</SelectItem>
+                    <SelectItem value="COACH">Coach</SelectItem>
                     <SelectItem value="ADMIN">Admin</SelectItem>
                   </SelectContent>
                 </Select>

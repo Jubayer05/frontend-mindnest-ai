@@ -51,16 +51,22 @@ export const API_ENDPOINTS = {
   profile: {
     get: `${BASE_URL}/profile`,
     update: `${BASE_URL}/profile`,
-    tutorUpsert: `${BASE_URL}/tutor/profile`,
-    tutorByUserId: (userId: string) => `${BASE_URL}/tutor/profile/${userId}`,
-    /** Signed-in tutor’s reviews (auth). */
-    tutorMyReviews: `${BASE_URL}/tutor/reviews`,
+    tutorUpsert: `${BASE_URL}/coach/profile`,
+    tutorByUserId: (userId: string) => `${BASE_URL}/coach/profile/${userId}`,
+    /** Signed-in coach’s reviews (auth). */
+    tutorMyReviews: `${BASE_URL}/coach/reviews`,
   },
   tutor: {
     featured: (limit?: number) =>
       limit != null
-        ? `${BASE_URL}/tutor/featured?limit=${encodeURIComponent(String(limit))}`
-        : `${BASE_URL}/tutor/featured`,
+        ? `${BASE_URL}/coach/featured?limit=${encodeURIComponent(String(limit))}`
+        : `${BASE_URL}/coach/featured`,
+  },
+  ai: {
+    searchSuggestions: (q: string) =>
+      `${BASE_URL}/ai/search-suggestions?q=${encodeURIComponent(q)}`,
+    chat: `${BASE_URL}/ai/chat`,
+    coachRecommendations: `${BASE_URL}/ai/coach-recommendations`,
   },
   upload: {
     single: `${BASE_URL}/upload/single`,
@@ -98,7 +104,7 @@ export const API_ENDPOINTS = {
       q?: string;
       sort?: string;
     }) => {
-      return withQuery(`${BASE_URL}/tutors`, {
+      return withQuery(`${BASE_URL}/coaches`, {
         page: params?.page,
         limit: params?.limit,
         categoryId: params?.categoryId,
@@ -113,14 +119,14 @@ export const API_ENDPOINTS = {
       userId: string,
       params?: { reviewsPage?: number; reviewsLimit?: number },
     ) => {
-      return withQuery(`${BASE_URL}/tutors/${encodeURIComponent(userId)}`, {
+      return withQuery(`${BASE_URL}/coaches/${encodeURIComponent(userId)}`, {
         reviewsPage: params?.reviewsPage,
         reviewsLimit: params?.reviewsLimit,
       });
     },
     reviews: (userId: string, params?: { page?: number; limit?: number }) => {
       return withQuery(
-        `${BASE_URL}/tutors/${encodeURIComponent(userId)}/reviews`,
+        `${BASE_URL}/coaches/${encodeURIComponent(userId)}/reviews`,
         {
           page: params?.page,
           limit: params?.limit,
@@ -150,7 +156,7 @@ export const API_ENDPOINTS = {
     delete: (id: string) =>
       `${BASE_URL}/categories/${encodeURIComponent(id)}`,
     tutors: (id: string) =>
-      `${BASE_URL}/categories/${encodeURIComponent(id)}/tutors`,
+      `${BASE_URL}/categories/${encodeURIComponent(id)}/coaches`,
   },
   subject: {
     list: `${BASE_URL}/subjects`,
@@ -162,6 +168,6 @@ export const API_ENDPOINTS = {
     delete: (id: string) =>
       `${BASE_URL}/subjects/${encodeURIComponent(id)}`,
     tutors: (id: string) =>
-      `${BASE_URL}/subjects/${encodeURIComponent(id)}/tutors`,
+      `${BASE_URL}/subjects/${encodeURIComponent(id)}/coaches`,
   },
 } as const;

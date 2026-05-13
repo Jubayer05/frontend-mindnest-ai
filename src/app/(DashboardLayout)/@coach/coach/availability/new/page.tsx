@@ -25,7 +25,7 @@ export default function TutorAvailabilityNewPage() {
             size="sm"
             className="-ml-2 h-auto px-2 text-[#5c5a54] hover:text-[#0f1f3d]"
           >
-            <Link href="/tutor/availability">← Availability</Link>
+            <Link href="/coach/availability">← Availability</Link>
           </Button>
           <DashboardHero
             eyebrow="Create"

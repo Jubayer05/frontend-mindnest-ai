@@ -34,14 +34,14 @@ const accentStyles = [
 
 const defaultFaqs = [
   {
-    question: "What is SkillBridge?",
+    question: "What is MindNest AI?",
     answer:
-      "SkillBridge is a platform where you can learn new skills from others and share what you know. Whether you want to pick up a new hobby, advance your career, or teach others, SkillBridge connects learners with skilled mentors in a simple, supportive environment.",
+      "MindNest AI is a platform where you can learn new skills from others and share what you know. Whether you want to pick up a new hobby, advance your career, or teach others, MindNest AI connects learners with skilled mentors in a simple, supportive environment.",
   },
   {
-    question: "Is SkillBridge free to use?",
+    question: "Is MindNest AI free to use?",
     answer:
-      "You can join and explore SkillBridge for free. Some courses or one-on-one sessions may have a fee set by the instructor. We also offer premium features for instructors who want to grow their audience and manage their offerings.",
+      "You can join and explore MindNest AI for free. Some courses or one-on-one sessions may have a fee set by the instructor. We also offer premium features for instructors who want to grow their audience and manage their offerings.",
   },
   {
     question: "How do I become an instructor?",
@@ -73,7 +73,7 @@ interface FaqHomeProps {
 
 export function FaqHome({
   title = "Frequently asked questions.",
-  description = "Everything you need to know about learning and teaching on SkillBridge.",
+  description = "Everything you need to know about learning and teaching on MindNest AI.",
   faqs = defaultFaqs,
   className,
 }: FaqHomeProps) {

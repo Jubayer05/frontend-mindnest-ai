@@ -5,8 +5,8 @@ import { AppSidebar } from "@/components/shared/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import {
   getAdminSidebarMenu,
-  getStudentSidebarMenu,
-  getTutorSidebarMenu,
+  getCoachSidebarMenu,
+  getMemberSidebarMenu,
 } from "@/config/sidebar-menus";
 import { useAuth } from "@/context/auth-context";
 import { usePathname, useRouter } from "next/navigation";
@@ -32,14 +32,14 @@ function useHasMounted() {
 
 export default function DashboardLayout({
   children,
-  student,
+  member,
   admin,
-  tutor,
+  coach,
 }: {
   children: ReactNode;
-  student: ReactNode;
+  member: ReactNode;
   admin: ReactNode;
-  tutor: ReactNode;
+  coach: ReactNode;
 }) {
   const { user } = useAuth();
   const pathname = usePathname();
@@ -75,23 +75,22 @@ export default function DashboardLayout({
 
   const role = activeUser?.role;
   const isAdmin = role === "ADMIN";
-  const isTutor = role === "TUTOR";
+  const isCoach = role === "COACH";
   const sidebarMenu = isAdmin
     ? getAdminSidebarMenu(activeUser)
-    : isTutor
-      ? getTutorSidebarMenu(activeUser)
-      : getStudentSidebarMenu(activeUser);
+    : isCoach
+      ? getCoachSidebarMenu(activeUser)
+      : getMemberSidebarMenu(activeUser);
 
   // At /dashboard use the role-specific parallel slot content.
-  // Tutor availability and related routes live under the @tutor parallel segment
-  // (`@tutor/tutor/...`), so for /tutor/* we must render that slot, not `children`.
+  // Coach availability lives under `@coach/coach/...` → `/coach/*`.
   const isDashboard = path === "/dashboard";
-  const dashboardSlot = isAdmin ? admin : isTutor ? tutor : student;
-  const isTutorAppRoute = isTutor && path.startsWith("/tutor/");
+  const dashboardSlot = isAdmin ? admin : isCoach ? coach : member;
+  const isCoachAppRoute = isCoach && path.startsWith("/coach/");
   const content = isDashboard
     ? dashboardSlot
-    : isTutorAppRoute
-      ? tutor
+    : isCoachAppRoute
+      ? coach
       : children;
 
   return (

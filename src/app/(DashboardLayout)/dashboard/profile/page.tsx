@@ -28,7 +28,7 @@ export default function DashboardProfilePage() {
     );
   }
 
-  if (user?.role === "TUTOR") {
+  if (user?.role === "COACH") {
     return <TutorProfileForm />;
   }
 

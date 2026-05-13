@@ -1,50 +1,37 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-const COOKIE_NAME = "skillbridge-user";
+const MINDNEST_USER = "mindnest-user";
 
-// Routes that require authentication
-const PROTECTED_PATHS = ["/dashboard", "/admin", "/student", "/tutor"];
+// Paths that require authentication
+const PROTECTED_PREFIXES = [
+  "/dashboard",
+  "/admin",
+  "/coach",
+];
 
-// Routes that logged-in users should not see (auth pages)
-const AUTH_PATHS = ["/auth/login", "/auth/register"];
+// Auth pages that logged-in users should be redirected away from
+const AUTH_PATHS = ["/auth/login", "/auth/register", "/auth/forgot-password"];
 
-function getUserFromRequest(request: NextRequest): {
+function parseMindnestUserCookie(value: string | undefined): {
   role: string | null;
   isLoggedIn: boolean;
 } {
-  const raw = request.cookies.get(COOKIE_NAME)?.value;
-  if (!raw) return { role: null, isLoggedIn: false };
+  if (!value) return { role: null, isLoggedIn: false };
 
   try {
-    const parsed: unknown = JSON.parse(decodeURIComponent(raw));
+    const parsed = JSON.parse(decodeURIComponent(value)) as {
+      user?: { role?: string };
+      sessionExpiresAt?: string;
+    };
 
-    if (
-      parsed &&
-      typeof parsed === "object" &&
-      "user" in parsed &&
-      "sessionExpiresAt" in parsed
-    ) {
-      const wrapped = parsed as {
-        user?: { role?: string };
-        sessionExpiresAt?: string;
-      };
-      const exp = wrapped.sessionExpiresAt;
-      if (
-        typeof exp === "string" &&
-        !Number.isNaN(Date.parse(exp)) &&
-        Date.parse(exp) <= Date.now()
-      ) {
+    if (parsed.sessionExpiresAt) {
+      const exp = new Date(parsed.sessionExpiresAt).getTime();
+      if (!Number.isNaN(exp) && exp <= Date.now()) {
         return { role: null, isLoggedIn: false };
       }
-      const role =
-        typeof wrapped.user?.role === "string" ? wrapped.user.role : null;
-      return { role, isLoggedIn: !!role };
     }
 
-    // Legacy flat user JSON
-    const flat = parsed as { role?: string };
-    const role = typeof flat?.role === "string" ? flat.role : null;
+    const role = typeof parsed.user?.role === "string" ? parsed.user.role : null;
     return { role, isLoggedIn: !!role };
   } catch {
     return { role: null, isLoggedIn: false };
@@ -53,67 +40,55 @@ function getUserFromRequest(request: NextRequest): {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const { role, isLoggedIn } = getUserFromRequest(request);
+  const cookieValue = request.cookies.get(MINDNEST_USER)?.value;
+  const { role, isLoggedIn } = parseMindnestUserCookie(cookieValue);
 
-  // ── Protect dashboard / role sub-routes ──────────────────────────────────
-  const isProtected = PROTECTED_PATHS.some(
+  // ── Auth guard: protect dashboard/admin/coach routes ──────────────────────
+  const isProtected = PROTECTED_PREFIXES.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`),
   );
 
   if (isProtected && !isLoggedIn) {
     const loginUrl = new URL("/auth/login", request.url);
-    // Preserve the intended destination so we can redirect back after login
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // ── Redirect logged-in users away from auth pages ────────────────────────
+  // ── Redirect logged-in users away from auth pages ─────────────────────────
   const isAuthPage = AUTH_PATHS.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`),
   );
 
   if (isAuthPage && isLoggedIn) {
-    const dest = role === "ADMIN" ? "/admin" : "/dashboard";
-    return NextResponse.redirect(new URL(dest, request.url));
-  }
-
-  // ── Role-based access control ─────────────────────────────────────────────
-  // Students cannot access admin or tutor routes
-  if (
-    role === "STUDENT" &&
-    (pathname.startsWith("/admin") || pathname.startsWith("/tutor"))
-  ) {
+    if (role === "ADMIN") {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  // Tutors cannot access admin or student routes
-  if (
-    role === "TUTOR" &&
-    (pathname.startsWith("/admin") || pathname.startsWith("/student"))
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
-  // Admins cannot access student or tutor routes
-  if (
-    role === "ADMIN" &&
-    (pathname.startsWith("/student") || pathname.startsWith("/tutor"))
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+  // ── Role-based route guards ────────────────────────────────────────────────
+  if (isLoggedIn) {
+    if (role === "ADMIN" && pathname.startsWith("/member")) {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
+    if (role === "COACH" && pathname.startsWith("/member")) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+    if (role === "MEMBER" && pathname.startsWith("/admin")) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
   }
 
   return NextResponse.next();
-}
+};
 
 export const config = {
   matcher: [
-    "/dashboard",
     "/dashboard/:path*",
-    "/admin",
     "/admin/:path*",
-    "/student/:path*",
-    "/tutor/:path*",
+    "/coach/:path*",
     "/auth/login",
     "/auth/register",
+    "/auth/forgot-password",
   ],
 };

@@ -124,39 +124,39 @@
   --tracking-normal: 0em;
 
   /* Core surfaces */
-  --background: #ffffff;
-  --foreground: #1a1a2e; /* Very dark navy — body text */
+  --background: #f8fbff;
+  --foreground: #0b1b4d;
 
   /* Card / Popover surfaces */
-  --card: #f8f9fb;
-  --card-foreground: #1a1a2e;
+  --card: #ffffff;
+  --card-foreground: #0b1b4d;
   --popover: #ffffff;
-  --popover-foreground: #1a1a2e;
+  --popover-foreground: #0b1b4d;
 
-  /* ── PRIMARY  →  Brand Orange #F26420 ── */
-  --primary: #f26420;
+  /* ── PRIMARY  →  Brand Orange #2563FF ── */
+  --primary: #2563FF;
   --primary-foreground: #ffffff;
 
   /* ── SECONDARY  →  Soft orange tint for secondary buttons/states ── */
-  --secondary: #fff1ea;
-  --secondary-foreground: #c04d0f;
+  --secondary: #eaf2ff;
+  --secondary-foreground: #1d4ed8;
 
   /* ── MUTED  →  Light neutral for backgrounds and disabled states ── */
   --muted: #f4f5f7;
   --muted-foreground: #6b7280;
 
-  /* ── ACCENT  →  Brand Navy #16116C for active nav, headings, highlights ── */
+  /* ── ACCENT  →  Brand Navy #0B1B4D for active nav, headings, highlights ── */
   --accent: #eeedf8;
-  --accent-foreground: #16116c;
+  --accent-foreground: #0B1B4D;
 
   /* ── DESTRUCTIVE ── */
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
   /* ── BORDERS & INPUTS ── */
-  --border: #e5e7eb;
+  --border: #dce7ff;
   --input: #f4f5f7;
-  --ring: #f26420;
+  --ring: #2563FF;
 
   /* ── CHARTS ── */
   /* chart-1: Orange (primary brand)   */
@@ -164,24 +164,24 @@
   /* chart-3: Teal                     */
   /* chart-4: Amber                    */
   /* chart-5: Red/Coral                */
-  --chart-1: #f26420;
-  --chart-2: #16116c;
+  --chart-1: #2563FF;
+  --chart-2: #0B1B4D;
   --chart-3: #0e9f9f;
   --chart-4: #f59e0b;
   --chart-5: #ef4444;
 
   /* Admin sidebar: text + icon ink on white shell */
-  --admin-sidebar-nav: #16116c;
+  --admin-sidebar-nav: #0B1B4D;
 
   /* ── SIDEBAR  →  Light gray panel matching the wireframe left nav ── */
   --sidebar: #f4f5f7;
   --sidebar-foreground: #374151;
-  --sidebar-primary: #f26420;
+  --sidebar-primary: #2563FF;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #eeedf8;
-  --sidebar-accent-foreground: #16116c;
+  --sidebar-accent-foreground: #0B1B4D;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: #f26420;
+  --sidebar-ring: #2563FF;
 
   /* ── TYPOGRAPHY (sans: --font-sans from next/font on html) ── */
   --font-serif: Source Serif 4, serif;
@@ -226,7 +226,7 @@
   --popover-foreground: #f0f0f8;
 
   /* ── PRIMARY  →  Brand Orange stays vibrant on dark ── */
-  --primary: #f26420;
+  --primary: #2563FF;
   --primary-foreground: #ffffff;
 
   /* ── SECONDARY  →  Slightly lighter navy panel ── */
@@ -251,10 +251,10 @@
   /* ── BORDERS & INPUTS ── */
   --border: #2e2d52;
   --input: #23224a;
-  --ring: #f26420;
+  --ring: #2563FF;
 
   /* ── CHARTS ── */
-  --chart-1: #f26420;
+  --chart-1: #2563FF;
   --chart-2: #7b78e0;
   --chart-3: #22d3d3;
   --chart-4: #fbbf24;
@@ -263,12 +263,12 @@
   /* ── SIDEBAR  →  Slightly elevated from background ── */
   --sidebar: #16152e;
   --sidebar-foreground: #c7c6e8;
-  --sidebar-primary: #f26420;
+  --sidebar-primary: #2563FF;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #2a2858;
   --sidebar-accent-foreground: #ffa26b;
   --sidebar-border: #2e2d52;
-  --sidebar-ring: #f26420;
+  --sidebar-ring: #2563FF;
 
   /* ── TYPOGRAPHY (sans: inherited --font-sans from html) ── */
   --font-serif: Source Serif 4, serif;
@@ -398,7 +398,7 @@ button {
    ========================================================================== */
 @keyframes highlight-flash {
   0% {
-    background-color: rgba(242, 100, 32, 0.15);
+    background-color: rgba(37, 99, 255, 0.15);
   }
   100% {
     background-color: transparent;
@@ -488,7 +488,7 @@ body.exam-locked * {
 }
 
 #screenshot-block-overlay h1 {
-  color: #f26420;
+  color: #2563FF;
   margin-bottom: 20px;
 }
 
@@ -516,14 +516,14 @@ body.exam-locked * {
   0%,
   100% {
     box-shadow:
-      0 0 20px rgba(242, 100, 32, 0.35),
-      0 0 40px rgba(242, 100, 32, 0.2),
+      0 0 20px rgba(37, 99, 255, 0.35),
+      0 0 40px rgba(37, 99, 255, 0.2),
       0 0 60px rgba(192, 77, 15, 0.15);
   }
   50% {
     box-shadow:
-      0 0 30px rgba(242, 100, 32, 0.55),
-      0 0 60px rgba(242, 100, 32, 0.35),
+      0 0 30px rgba(37, 99, 255, 0.55),
+      0 0 60px rgba(37, 99, 255, 0.35),
       0 0 90px rgba(192, 77, 15, 0.25);
   }
 }
@@ -533,13 +533,13 @@ body.exam-locked * {
   100% {
     border-color: rgba(255, 255, 255, 0.3);
     box-shadow:
-      0 0 10px rgba(242, 100, 32, 0.2),
+      0 0 10px rgba(37, 99, 255, 0.2),
       inset 0 0 10px rgba(255, 255, 255, 0.1);
   }
   50% {
     border-color: rgba(255, 255, 255, 0.55);
     box-shadow:
-      0 0 22px rgba(242, 100, 32, 0.4),
+      0 0 22px rgba(37, 99, 255, 0.4),
       inset 0 0 20px rgba(255, 255, 255, 0.15);
   }
 }
@@ -566,13 +566,13 @@ body.exam-locked * {
 .glass-gradient-animated {
   background: linear-gradient(
     135deg,
-    rgba(242, 100, 32, 0.92) 0%,
+    rgba(37, 99, 255, 0.92) 0%,
     rgba(255, 130, 70, 0.88) 20%,
-    rgba(242, 100, 32, 0.95) 40%,
+    rgba(37, 99, 255, 0.95) 40%,
     rgba(220, 80, 20, 0.97) 50%,
-    rgba(242, 100, 32, 0.95) 60%,
+    rgba(37, 99, 255, 0.95) 60%,
     rgba(255, 130, 70, 0.88) 80%,
-    rgba(242, 100, 32, 0.92) 100%
+    rgba(37, 99, 255, 0.92) 100%
   );
   background-size: 300% 300%;
   animation:
@@ -650,10 +650,10 @@ body.exam-locked * {
   0%,
   100% {
     /* Orange primary RGB: 242, 100, 32 */
-    box-shadow: 0 0 0 0 rgba(242, 100, 32, 0);
+    box-shadow: 0 0 0 0 rgba(37, 99, 255, 0);
   }
   50% {
-    box-shadow: 0 0 12px 2px rgba(242, 100, 32, 0.18);
+    box-shadow: 0 0 12px 2px rgba(37, 99, 255, 0.18);
   }
 }
 
@@ -665,11 +665,11 @@ body.exam-locked * {
 .scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-gutter: stable;
-  scrollbar-color: rgba(242, 100, 32, 0.3) transparent;
+  scrollbar-color: rgba(37, 99, 255, 0.3) transparent;
 }
 
 .dark .scrollbar-thin {
-  scrollbar-color: rgba(242, 100, 32, 0.4) transparent;
+  scrollbar-color: rgba(37, 99, 255, 0.4) transparent;
 }
 
 .scrollbar-thin::-webkit-scrollbar {
@@ -681,20 +681,20 @@ body.exam-locked * {
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgba(242, 100, 32, 0.3);
+  background: rgba(37, 99, 255, 0.3);
   border-radius: 9999px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgba(242, 100, 32, 0.55);
+  background: rgba(37, 99, 255, 0.55);
 }
 
 .dark .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgba(242, 100, 32, 0.4);
+  background: rgba(37, 99, 255, 0.4);
 }
 
 .dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgba(242, 100, 32, 0.65);
+  background: rgba(37, 99, 255, 0.65);
 }
 
 /* Sidebar-specific scrollbar */
@@ -722,12 +722,12 @@ body.exam-locked * {
 }
 
 [data-sidebar="content"]::-webkit-scrollbar-thumb:hover {
-  background: rgba(242, 100, 32, 0.35);
+  background: rgba(37, 99, 255, 0.35);
   background-clip: padding-box;
 }
 
 [data-sidebar="content"]::-webkit-scrollbar-thumb:active {
-  background: rgba(242, 100, 32, 0.55);
+  background: rgba(37, 99, 255, 0.55);
   background-clip: padding-box;
 }
 
@@ -741,12 +741,12 @@ body.exam-locked * {
 }
 
 .dark [data-sidebar="content"]::-webkit-scrollbar-thumb:hover {
-  background: rgba(242, 100, 32, 0.45);
+  background: rgba(37, 99, 255, 0.45);
   background-clip: padding-box;
 }
 
 .dark [data-sidebar="content"]::-webkit-scrollbar-thumb:active {
-  background: rgba(242, 100, 32, 0.65);
+  background: rgba(37, 99, 255, 0.65);
   background-clip: padding-box;
 }
 

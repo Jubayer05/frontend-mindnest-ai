@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { SocialAuthButtons } from "./social-auth-buttons";
 import { registerUser } from "@/services/auth";
 import type { RegisterPayload } from "@/types/auth";
 
@@ -31,7 +32,7 @@ const signupSchema = z
       .string()
       .min(1, "Email is required")
       .email("Enter a valid email address"),
-    role: z.enum(["STUDENT", "TUTOR"], {
+    role: z.enum(["MEMBER", "COACH"], {
       error: "Please select a role",
     }),
     password: z
@@ -60,7 +61,7 @@ export function SignupForm() {
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
-      role: "STUDENT",
+      role: "MEMBER",
     },
   });
 
@@ -85,9 +86,11 @@ export function SignupForm() {
           Create your account
         </h1>
         <p className="text-sm text-muted-foreground text-balance">
-          Join SkillBridge and start learning today
+          Join MindNest AI and start your coaching journey today
         </p>
       </div>
+
+      <SocialAuthButtons />
 
       {/* Fields */}
       <div className="grid gap-5">
@@ -133,7 +136,7 @@ export function SignupForm() {
             I want to join as
           </Label>
           <Select
-            defaultValue="STUDENT"
+            defaultValue="MEMBER"
             onValueChange={(value) =>
               setValue("role", value as SignupFormValues["role"], {
                 shouldDirty: true,
@@ -145,8 +148,8 @@ export function SignupForm() {
               <SelectValue placeholder="Select your role" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="STUDENT">Student</SelectItem>
-              <SelectItem value="TUTOR">Tutor</SelectItem>
+              <SelectItem value="MEMBER">Member</SelectItem>
+              <SelectItem value="COACH">Coach</SelectItem>
             </SelectContent>
           </Select>
           {errors.role && (

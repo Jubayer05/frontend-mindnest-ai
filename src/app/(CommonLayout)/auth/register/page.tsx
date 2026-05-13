@@ -14,7 +14,7 @@ export default function RegisterPage() {
 
       <AuthSidePanel
         title="Start building your learning path."
-        description="Create your account to join courses, connect with tutors, and grow your skills with SkillBridge."
+        description="Create your account to book coaches, manage sessions, and grow with MindNest AI."
       />
     </div>
   );

@@ -13,6 +13,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCategories } from "@/hooks/useCategories";
 import { cn } from "@/lib/utils";
+import { fetchSearchSuggestions } from "@/services/aiClient";
 import { listTutors } from "@/services/tutorsBrowse";
 import type {
   PaginatedTutorList,
@@ -54,6 +55,8 @@ export function TutorsBrowsePage() {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<"grid" | "list">("grid");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const suggestTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const page = Math.max(1, parseNum(searchParams.get("page")) ?? 1);
   const limit = Math.min(
@@ -91,7 +94,7 @@ export function TutorsBrowsePage() {
       });
       setData(res);
     } catch (e: unknown) {
-      toast.error(e instanceof Error ? e.message : "Failed to load tutors");
+      toast.error(e instanceof Error ? e.message : "Failed to load coaches");
       setData(null);
     } finally {
       setLoading(false);
@@ -109,7 +112,7 @@ export function TutorsBrowsePage() {
       else p.set(k, v);
     }
     if (!("page" in next)) p.set("page", "1");
-    router.push(`/tutors?${p.toString()}`);
+    router.push(`/coaches?${p.toString()}`);
   };
 
   const hasActiveFilters = !!(
@@ -168,7 +171,7 @@ export function TutorsBrowsePage() {
               <div className="flex items-center gap-3">
                 {hasActiveFilters && (
                   <button
-                    onClick={() => router.push("/tutors")}
+                    onClick={() => router.push("/coaches")}
                     className="text-[11px] text-amber-600 font-medium uppercase tracking-wider hover:text-amber-700"
                   >
                     Clear all
@@ -304,6 +307,7 @@ export function TutorsBrowsePage() {
         <div className="min-w-0 flex-1">
           {/* Search + toolbar */}
           <div className="mb-5 flex max-w-xl flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="relative flex min-w-0 flex-1 flex-col">
             <div className="flex min-w-0 flex-1 overflow-hidden rounded-lg border border-[#e4e1d8] bg-white shadow-sm">
               <input
                 ref={searchInputRef}
@@ -313,24 +317,64 @@ export function TutorsBrowsePage() {
                 className="placeholder:text-muted-foreground h-10 min-w-0 flex-1 border-0 bg-transparent px-3 text-[13.5px] text-[#0f1f3d] outline-none"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
+                    setSuggestions([]);
                     pushFilters({
                       q: (e.target as HTMLInputElement).value || undefined,
                     });
                   }
                 }}
+                onInput={(e) => {
+                  const v = (e.target as HTMLInputElement).value.trim();
+                  if (suggestTimer.current) clearTimeout(suggestTimer.current);
+                  if (v.length < 2) {
+                    setSuggestions([]);
+                    return;
+                  }
+                  suggestTimer.current = setTimeout(() => {
+                    void fetchSearchSuggestions(v)
+                      .then(setSuggestions)
+                      .catch(() => setSuggestions([]));
+                  }, 220);
+                }}
               />
               <button
                 type="button"
-                onClick={() =>
+                onClick={() => {
+                  setSuggestions([]);
                   pushFilters({
                     q: searchInputRef.current?.value?.trim() || undefined,
-                  })
-                }
+                  });
+                }}
                 className="flex shrink-0 items-center gap-2 bg-amber-400 px-4 text-[13px] font-medium text-[#0f1f3d] transition-colors hover:bg-amber-300"
               >
                 <Search className="size-4" />
                 <span className="hidden sm:inline">Search</span>
               </button>
+            </div>
+            {suggestions.length > 0 && (
+              <ul
+                className="absolute top-full z-20 mt-1 max-h-56 w-full overflow-auto rounded-lg border border-border bg-popover py-1 text-[13px] shadow-md"
+                role="listbox"
+              >
+                {suggestions.map((s) => (
+                  <li key={s}>
+                    <button
+                      type="button"
+                      className="w-full px-3 py-2 text-left hover:bg-muted"
+                      onClick={() => {
+                        if (searchInputRef.current) {
+                          searchInputRef.current.value = s;
+                        }
+                        setSuggestions([]);
+                        pushFilters({ q: s });
+                      }}
+                    >
+                      {s}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
             </div>
           </div>
 
@@ -343,7 +387,7 @@ export function TutorsBrowsePage() {
                   <span className="font-medium text-[#0f1f3d]">
                     {data.total}
                   </span>{" "}
-                  tutor{data.total === 1 ? "" : "s"} found
+                  coach{data.total === 1 ? "" : "es"} found
                 </>
               ) : null}
             </p>
@@ -457,11 +501,11 @@ export function TutorsBrowsePage() {
             <div
               className={
                 view === "grid"
-                  ? "grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
+                  ? "grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                   : "space-y-3"
               }
             >
-              {Array.from({ length: 6 }).map((_, i) => (
+              {Array.from({ length: 8 }).map((_, i) => (
                 <Skeleton
                   key={i}
                   className={
@@ -473,17 +517,17 @@ export function TutorsBrowsePage() {
           ) : data?.items.length === 0 ? (
             <div className="py-20 text-center">
               <p className="text-[#8896a8] text-[15px] mb-1">
-                No tutors match your filters.
+                No coaches match your filters.
               </p>
               <Link
-                href="/tutors"
+                href="/coaches"
                 className="text-[13px] text-amber-600 underline underline-offset-2"
               >
                 Reset all filters
               </Link>
             </div>
           ) : view === "grid" ? (
-            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {data?.items.map((t) => (
                 <TutorDiscoveryCard key={t.id} tutor={t} variant="grid" />
               ))}
@@ -503,7 +547,7 @@ export function TutorsBrowsePage() {
                 onClick={() => {
                   const p = new URLSearchParams(searchParams.toString());
                   p.set("page", String(page - 1));
-                  router.push(`/tutors?${p.toString()}`);
+                  router.push(`/coaches?${p.toString()}`);
                 }}
                 disabled={page <= 1 || loading}
                 aria-label="Previous page"
@@ -520,7 +564,7 @@ export function TutorsBrowsePage() {
                     onClick={() => {
                       const p = new URLSearchParams(searchParams.toString());
                       p.set("page", String(pg));
-                      router.push(`/tutors?${p.toString()}`);
+                      router.push(`/coaches?${p.toString()}`);
                     }}
                     disabled={loading}
                   >
@@ -541,7 +585,7 @@ export function TutorsBrowsePage() {
                 onClick={() => {
                   const p = new URLSearchParams(searchParams.toString());
                   p.set("page", String(page + 1));
-                  router.push(`/tutors?${p.toString()}`);
+                  router.push(`/coaches?${p.toString()}`);
                 }}
                 disabled={page >= data.totalPages || loading}
                 aria-label="Next page"

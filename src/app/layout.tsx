@@ -1,4 +1,5 @@
 import { SessionExpiredRedirect } from "@/components/auth/session-expired-redirect";
+import { MindNestAssistant } from "@/components/modules/ai/MindNestAssistant";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/context/auth-context";
 import { ThemeProvider } from "@/context/theme-context";
@@ -18,8 +19,9 @@ const fontHeading = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "SkillBridge",
-  description: "SkillBridge is a platform for learning and sharing skills",
+  title: "MindNest AI",
+  description:
+    "MindNest AI is a premium coaching marketplace for members, coaches, and admins.",
 };
 
 export default function RootLayout({
@@ -43,6 +45,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <SessionExpiredRedirect />
+            <MindNestAssistant />
             {children}
             <Toaster richColors position="top-right" />
           </ThemeProvider>

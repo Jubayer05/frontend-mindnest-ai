@@ -16,14 +16,14 @@ import {
 
 const ROLE_COLORS: Record<string, string> = {
   ADMIN: "var(--chart-1)",
-  TUTOR: "var(--chart-2)",
-  STUDENT: "var(--chart-3)",
+  COACH: "var(--chart-2)",
+  MEMBER: "var(--chart-3)",
 };
 
 function roleLabel(role: string) {
   if (role === "ADMIN") return "Admins";
-  if (role === "TUTOR") return "Tutors";
-  return "Students";
+  if (role === "COACH") return "Coaches";
+  return "Members";
 }
 
 export function AdminHome() {

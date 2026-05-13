@@ -3,7 +3,7 @@ import CreateSubjectPage from "@/views/subjects/CreateSubjectPage";
 
 export default function Page() {
   return (
-    <ProtectedRoute roles={["ADMIN", "TUTOR"]}>
+    <ProtectedRoute roles={["ADMIN", "COACH"]}>
       <CreateSubjectPage />
     </ProtectedRoute>
   );

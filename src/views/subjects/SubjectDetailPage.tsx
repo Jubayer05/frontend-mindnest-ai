@@ -20,7 +20,7 @@ export default function SubjectDetailPage() {
   const router = useRouter();
   const { user } = useAuth();
   const subjectId = paramId(params?.subjectId);
-  const canManage = user?.role === "ADMIN" || user?.role === "TUTOR";
+  const canManage = user?.role === "ADMIN" || user?.role === "COACH";
   const isAdmin = user?.role === "ADMIN";
   const [deleting, setDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);

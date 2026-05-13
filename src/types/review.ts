@@ -30,7 +30,7 @@ export type CreateReviewPayload = {
   comment?: string;
 };
 
-/** Tutor dashboard table row (from GET /tutor/reviews). */
+/** Tutor dashboard table row (from GET /coach/reviews). */
 export type TutorDashboardReviewRow = {
   id: string;
   rating: number;

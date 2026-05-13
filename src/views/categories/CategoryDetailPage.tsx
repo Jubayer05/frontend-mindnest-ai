@@ -23,7 +23,7 @@ export default function CategoryDetailPage() {
     : "/dashboard/categories";
   const { user } = useAuth();
   const categoryId = paramId(params?.categoryId);
-  const canManage = user?.role === "ADMIN" || user?.role === "TUTOR";
+  const canManage = user?.role === "ADMIN" || user?.role === "COACH";
   const isAdminRole = user?.role === "ADMIN";
   const [deleting, setDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);

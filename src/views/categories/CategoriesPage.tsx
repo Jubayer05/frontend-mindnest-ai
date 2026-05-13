@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function CategoriesPage() {
   const { user } = useAuth();
-  const canManage = user?.role === "ADMIN" || user?.role === "TUTOR";
+  const canManage = user?.role === "ADMIN" || user?.role === "COACH";
 
   return (
     <div className="space-y-6 p-4 md:p-6">

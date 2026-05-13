@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -30,7 +30,7 @@ function paramId(value: string | string[] | undefined): string {
 
 export default function SlotCheckoutPage() {
   return (
-    <ProtectedRoute roles={["STUDENT"]}>
+    <ProtectedRoute roles={["MEMBER"]}>
       <SlotCheckoutInner />
     </ProtectedRoute>
   );
@@ -52,7 +52,6 @@ function SlotCheckoutInner() {
 }
 
 function SlotCheckoutForSlot({ slotId }: { slotId: string }) {
-  const router = useRouter();
   const { user } = useAuth();
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -154,7 +153,8 @@ function SlotCheckoutForSlot({ slotId }: { slotId: string }) {
               })
                 .then(() => {
                   toast.success("Booking confirmed");
-                  router.push("/categories");
+                  // eslint-disable-next-line @next/next/no-router-push-in-next-link
+                  window.location.href = "/categories";
                 })
                 .catch((err: Error) => {
                   toast.error(err.message ?? "Could not create booking");

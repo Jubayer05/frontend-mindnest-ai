@@ -3,7 +3,7 @@ import CreateCategoryPage from "@/views/categories/CreateCategoryPage";
 
 export default function Page() {
   return (
-    <ProtectedRoute roles={["ADMIN", "TUTOR"]}>
+    <ProtectedRoute roles={["ADMIN", "COACH"]}>
       <CreateCategoryPage />
     </ProtectedRoute>
   );

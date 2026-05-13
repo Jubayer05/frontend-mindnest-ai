@@ -1,6 +1,12 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import {
+  ChevronDown,
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  UserCircle,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -11,7 +17,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -33,10 +48,13 @@ import {
   defaultNavbarMenu,
 } from "@/config/navbar";
 import { useAuth } from "@/context/auth-context";
+import { logoutUser } from "@/services/auth";
 import type { MenuItem, NavbarAuth, NavbarLogo } from "@/types/navbar";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSyncExternalStore } from "react";
+import { toast } from "sonner";
 
 interface NavbarProps {
   className?: string;
@@ -60,9 +78,30 @@ const Navbar = ({
   className,
 }: NavbarProps) => {
   const hasMounted = useHasMounted();
-  const { user } = useAuth();
+  const { user, clearAuth } = useAuth();
+  const router = useRouter();
   const activeUser = hasMounted ? user : null;
   const dashboardUrl = "/dashboard";
+
+  const initials =
+    activeUser?.name
+      ?.split(/\s+/)
+      .map((p) => p[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase() ?? "?";
+
+  const onLogout = async () => {
+    try {
+      await logoutUser();
+      clearAuth();
+      toast.success("Logged out.");
+      router.push("/auth/login");
+      router.refresh();
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "Logout failed");
+    }
+  };
 
   const logoDesktopClass =
     "h-10 w-auto object-contain object-left sm:h-11 lg:h-[50px]";
@@ -70,7 +109,12 @@ const Navbar = ({
     "h-12 w-auto max-w-[min(72vw,220px)] object-contain object-left sm:h-14";
 
   return (
-    <header className={cn("py-3 sm:py-4", className)}>
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full border-b border-border/60 bg-background/90 py-3 backdrop-blur-md sm:py-4",
+        className,
+      )}
+    >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between gap-6 lg:flex">
@@ -109,9 +153,63 @@ const Navbar = ({
           <div className="flex shrink-0 items-center gap-2">
             <ModeToggle />
             {activeUser ? (
-              <Button asChild size="sm">
-                <Link href={dashboardUrl}>Dashboard</Link>
-              </Button>
+              <>
+                <Button asChild size="sm" variant="secondary">
+                  <Link href={dashboardUrl}>Dashboard</Link>
+                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="gap-2 border-border"
+                    >
+                      <Avatar className="h-6 w-6">
+                        <AvatarFallback className="text-[10px]">
+                          {initials}
+                        </AvatarFallback>
+                      </Avatar>
+                      Account
+                      <ChevronDown className="size-4 opacity-60" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-52">
+                    <DropdownMenuLabel className="truncate text-xs font-normal text-muted-foreground">
+                      {activeUser.email}
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard" className="gap-2">
+                        <LayoutDashboard className="size-4" />
+                        Overview
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard/bookings">Bookings</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard/profile">
+                        <UserCircle className="size-4" />
+                        Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/coaches">Browse coaches</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/subjects">Subjects</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/help">Help</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => void onLogout()}>
+                      <LogOut className="size-4" />
+                      Log out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
             ) : (
               <>
                 <Button asChild variant="outline" size="sm">
@@ -206,9 +304,54 @@ const Navbar = ({
 
                 <div className="flex flex-col gap-3 pt-2">
                   {activeUser ? (
-                    <Button asChild className="w-full">
-                      <Link href={dashboardUrl}>Dashboard</Link>
-                    </Button>
+                    <>
+                      <div className="grid gap-1 rounded-lg border border-border bg-muted/40 p-2 text-sm">
+                        <Link
+                          href="/dashboard"
+                          className="rounded-md px-2 py-2 font-medium hover:bg-muted"
+                        >
+                          Dashboard
+                        </Link>
+                        <Link
+                          href="/dashboard/bookings"
+                          className="rounded-md px-2 py-2 hover:bg-muted"
+                        >
+                          Bookings
+                        </Link>
+                        <Link
+                          href="/dashboard/profile"
+                          className="rounded-md px-2 py-2 hover:bg-muted"
+                        >
+                          Profile
+                        </Link>
+                        <Link
+                          href="/coaches"
+                          className="rounded-md px-2 py-2 hover:bg-muted"
+                        >
+                          Coaches
+                        </Link>
+                        <Link
+                          href="/subjects"
+                          className="rounded-md px-2 py-2 hover:bg-muted"
+                        >
+                          Subjects
+                        </Link>
+                        <Link
+                          href="/help"
+                          className="rounded-md px-2 py-2 hover:bg-muted"
+                        >
+                          Help
+                        </Link>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => void onLogout()}
+                      >
+                        Log out
+                      </Button>
+                    </>
                   ) : (
                     <>
                       <Button asChild variant="outline" className="w-full">

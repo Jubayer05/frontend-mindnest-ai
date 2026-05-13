@@ -11,14 +11,14 @@ const DEMO_ACCOUNTS = [
       "text-rose-500 border-rose-200 hover:bg-rose-50 hover:border-rose-400 dark:border-rose-800 dark:hover:bg-rose-950",
   },
   {
-    label: "Tutor",
+    label: "Coach",
     email: "tutor@gmail.com",
     password: "123456abc!A",
     color:
       "text-violet-500 border-violet-200 hover:bg-violet-50 hover:border-violet-400 dark:border-violet-800 dark:hover:bg-violet-950",
   },
   {
-    label: "Student",
+    label: "Member",
     email: "student@gmail.com",
     password: "123456abc!A",
     color:

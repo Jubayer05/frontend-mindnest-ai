@@ -7,6 +7,7 @@ import {
   Calendar,
   ClipboardList,
   Command,
+  Compass,
   FolderTree,
   Frame,
   GalleryVerticalEnd,
@@ -56,6 +57,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   GalleryVerticalEnd,
   AudioWaveform,
   Command,
+  Compass,
   FolderTree,
   Users,
 };

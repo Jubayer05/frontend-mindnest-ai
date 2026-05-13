@@ -8,56 +8,43 @@ import "slick-carousel/slick/slick.css";
 
 const slides = [
   {
-    tag: "Now in open beta",
-    headline: "The learning platform\nbuilt around real expertise.",
-    sub: "Connect with practitioners who teach from experience — not just theory. Skills that actually transfer.",
-    primaryCta: { label: "Start learning free", href: "/signup" },
-    secondaryCta: { label: "Browse courses", href: "/courses" },
-    trust: ["No credit card required", "Free forever tier", "Cancel anytime"],
+    tag: "MindNest AI · Premium coaching",
+    headline: "Human expertise,\namplified with clarity.",
+    sub: "Book vetted coaches by subject, compare transparent rates and ratings, and learn in focused one-on-one sessions.",
+    primaryCta: { label: "Create your member account", href: "/auth/register" },
+    secondaryCta: { label: "Browse coaches", href: "/coaches" },
+    trust: ["Verified coach profiles", "Secure checkout", "Reviews after every session"],
     image:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&q=80",
-    bar: "linear-gradient(90deg,#534AB7,#7F77DD,#AFA9EC)",
-    accent: "#7F77DD",
-    dot: "#7F77DD",
+    bar: "linear-gradient(135deg,#2563FF 0%,#6BA6FF 100%)",
+    accent: "#2563FF",
+    dot: "#4F8CFF",
   },
   {
-    tag: "12,400+ active learners",
-    headline: "Grow your skills.\nAdvance your career.",
-    sub: "Structured learning paths built by industry veterans. Go from beginner to job-ready in weeks, not years.",
-    primaryCta: { label: "Explore paths", href: "/courses" },
-    secondaryCta: { label: "See success stories", href: "/stories" },
-    trust: ["Verified instructors", "Hands-on projects", "Lifetime access"],
+    tag: "For members",
+    headline: "Find the right coach\nin minutes.",
+    sub: "Filter by category, price, and rating. See real availability, book a slot, and keep every session organized in your dashboard.",
+    primaryCta: { label: "Explore subjects", href: "/subjects" },
+    secondaryCta: { label: "View categories", href: "/categories" },
+    trust: ["Smart search suggestions", "Live marketplace data", "Booking history"],
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1400&q=80",
-    bar: "linear-gradient(90deg,#0F6E56,#1D9E75,#5DCAA5)",
-    accent: "#1D9E75",
-    dot: "#1D9E75",
+    bar: "linear-gradient(135deg,#2563FF 0%,#7CB8FF 100%)",
+    accent: "#4F8CFF",
+    dot: "#7CB8FF",
   },
   {
-    tag: "840 expert instructors",
-    headline: "Share what you know.\nBuild a real income.",
-    sub: "Turn your expertise into a course in minutes. Reach thousands of learners ready to pay for your knowledge.",
-    primaryCta: { label: "Become an instructor", href: "/teach" },
-    secondaryCta: { label: "See how it works", href: "/how-it-works" },
-    trust: ["Keep 80% revenue", "No upfront cost", "Full analytics"],
+    tag: "For coaches",
+    headline: "Teach on your terms.\nGrow your practice.",
+    sub: "Publish your profile, attach subjects, open calendar slots, and let MindNest AI surface you to the members who fit best.",
+    primaryCta: { label: "Join as a coach", href: "/auth/register" },
+    secondaryCta: { label: "How it works", href: "/help" },
+    trust: ["Availability tooling", "Member feedback loop", "Admin-backed catalog"],
     image:
       "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1400&q=80",
-    bar: "linear-gradient(90deg,#993C1D,#D85A30,#F0997B)",
-    accent: "#D85A30",
-    dot: "#D85A30",
-  },
-  {
-    tag: "Teams & enterprise",
-    headline: "Upskill your entire team.\nTogether.",
-    sub: "Custom learning plans, admin dashboards, and team analytics — everything your org needs to grow as one.",
-    primaryCta: { label: "Book a demo", href: "/demo" },
-    secondaryCta: { label: "View team plans", href: "/teams" },
-    trust: ["SSO & admin controls", "Progress reporting", "Dedicated support"],
-    image:
-      "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=80",
-    bar: "linear-gradient(90deg,#185FA5,#378ADD,#85B7EB)",
-    accent: "#378ADD",
-    dot: "#378ADD",
+    bar: "linear-gradient(135deg,#1d4ed8 0%,#60a5fa 100%)",
+    accent: "#2563FF",
+    dot: "#93c5fd",
   },
 ];
 
@@ -85,12 +72,17 @@ export function HomeBanner({ className }: { className?: string }) {
   };
 
   return (
-    <section className={cn("overflow-hidden rounded-xl", className)}>
+    <section
+      className={cn(
+        "overflow-hidden rounded-xl max-h-[70vh] min-h-[60vh]",
+        className,
+      )}
+    >
       <Slider {...settings}>
         {slides.map((s, i) => (
           <div key={i}>
             <div
-              className="relative px-8 py-20 text-center flex flex-col items-center sm:px-16 sm:py-28"
+              className="relative flex min-h-[58vh] max-h-[70vh] flex-col items-center justify-center px-8 py-16 text-center sm:px-16 sm:py-24"
               style={{
                 backgroundImage: `url(${s.image})`,
                 backgroundSize: "cover",

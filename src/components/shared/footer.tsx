@@ -34,53 +34,69 @@ const defaultSections = [
   {
     title: "Product",
     links: [
-      { name: "Overview", href: "#" },
-      { name: "Pricing", href: "#" },
-      { name: "Marketplace", href: "#" },
-      { name: "Features", href: "#" },
+      { name: "Coaches", href: "/coaches" },
+      { name: "Subjects", href: "/subjects" },
+      { name: "Categories", href: "/categories" },
+      { name: "Help center", href: "/help" },
     ],
   },
   {
     title: "Company",
     links: [
-      { name: "About", href: "#" },
-      { name: "Team", href: "#" },
-      { name: "Blog", href: "#" },
-      { name: "Careers", href: "#" },
+      { name: "About", href: "/about" },
+      { name: "Blog", href: "/blog" },
+      { name: "Contact", href: "/contact" },
+      { name: "Careers", href: "/contact" },
     ],
   },
   {
-    title: "Resources",
+    title: "Legal",
     links: [
-      { name: "Help", href: "#" },
-      { name: "Sales", href: "#" },
-      { name: "Advertise", href: "#" },
-      { name: "Privacy", href: "#" },
+      { name: "Privacy", href: "/privacy" },
+      { name: "Terms", href: "/terms" },
+      { name: "Support", href: "/help" },
+      { name: "Status", href: "/help" },
     ],
   },
 ];
 
 const defaultSocialLinks = [
-  { icon: <FaInstagram className="size-5" />, href: "#", label: "Instagram" },
-  { icon: <FaFacebook className="size-5" />, href: "#", label: "Facebook" },
-  { icon: <FaTwitter className="size-5" />, href: "#", label: "Twitter" },
-  { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
+  {
+    icon: <FaInstagram className="size-5" />,
+    href: "https://www.instagram.com/",
+    label: "Instagram",
+  },
+  {
+    icon: <FaFacebook className="size-5" />,
+    href: "https://www.facebook.com/",
+    label: "Facebook",
+  },
+  {
+    icon: <FaTwitter className="size-5" />,
+    href: "https://twitter.com/",
+    label: "Twitter",
+  },
+  {
+    icon: <FaLinkedin className="size-5" />,
+    href: "https://www.linkedin.com/",
+    label: "LinkedIn",
+  },
 ];
 
 const defaultLegalLinks = [
-  { name: "Terms and Conditions", href: "#" },
-  { name: "Privacy Policy", href: "#" },
+  { name: "Terms", href: "/terms" },
+  { name: "Privacy", href: "/privacy" },
 ];
 
 const Footer = ({
   logo = {
     url: "/",
     src: "/logo/logo-light.png",
-    alt: "SkillBridge logo",
-    title: "SkillBridge",
+    alt: "MindNest AI logo",
+    title: "MindNest AI",
   },
   sections = defaultSections,
-  description = "A platform for learning and sharing skills.",
+  description = "MindNest AI connects members with vetted coaches for focused one-on-one sessions—clear pricing, real availability, and reviews you can trust.",
   socialLinks = defaultSocialLinks,
   copyright = `© ${new Date().getFullYear()} ${logo.title}. All rights reserved.`,
   legalLinks = defaultLegalLinks,
@@ -114,6 +130,16 @@ const Footer = ({
             </div>
             <p className="mx-auto max-w-prose text-pretty text-sm text-muted-foreground sm:mx-0">
               {description}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              <span className="font-medium text-foreground">Contact</span>
+              <br />
+              <a
+                href="mailto:hello@mindnest.ai"
+                className="underline-offset-4 hover:text-primary hover:underline"
+              >
+                hello@mindnest.ai
+              </a>
             </p>
             <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 text-muted-foreground sm:justify-start sm:gap-x-6">
               {socialLinks.map((social, idx) => (

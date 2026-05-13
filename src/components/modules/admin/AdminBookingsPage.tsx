@@ -82,13 +82,13 @@ export function AdminBookingsPage() {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Bookings</h1>
         <p className="text-muted-foreground text-sm">
-          All platform bookings with status filters and student search.
+          All platform bookings with status filters and member search.
         </p>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end">
         <div className="min-w-[200px] flex-1 space-y-2">
-          <Label htmlFor="booking-search">Search student</Label>
+          <Label htmlFor="booking-search">Search member</Label>
           <div className="flex gap-2">
             <Input
               id="booking-search"

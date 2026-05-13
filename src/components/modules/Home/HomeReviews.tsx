@@ -32,7 +32,7 @@ const defaultReviews = [
     name: "Sarah Chen",
     role: "Product Designer",
     avatar: `${RANDOMUSER_BASE}/women/32.jpg`,
-    text: "SkillBridge helped me level up my design skills with real projects and feedback from working designers. The 1:1 sessions were worth every penny.",
+    text: "MindNest AI helped me level up my design skills with real projects and feedback from working designers. The 1:1 sessions were worth every penny.",
     rating: 5,
   },
   {
@@ -40,7 +40,7 @@ const defaultReviews = [
     name: "Marcus Johnson",
     role: "Software Developer",
     avatar: `${RANDOMUSER_BASE}/men/22.jpg`,
-    text: "I went from zero to landing my first dev job in six months. The mentors on SkillBridge know their stuff and actually care about your progress.",
+    text: "I went from zero to landing my first dev job in six months. The mentors on MindNest AI know their stuff and actually care about your progress.",
     rating: 5,
   },
   {
@@ -80,7 +80,7 @@ interface HomeReviewsProps {
 
 export function HomeReviews({
   title = "What learners are saying.",
-  description = "Real stories from people who built new skills and grew their careers on SkillBridge.",
+  description = "Real stories from people who built new skills and grew their careers on MindNest AI.",
   reviews = defaultReviews,
   autoplayDelay = 5000,
   className,

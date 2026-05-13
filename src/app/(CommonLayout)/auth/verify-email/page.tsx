@@ -17,7 +17,7 @@ export default function VerifyEmailPage() {
 
       <AuthSidePanel
         title="One step away from learning."
-        description="Verify your email to unlock your SkillBridge account and start exploring courses."
+        description="Verify your email to unlock your MindNest AI account and start exploring courses."
       />
     </div>
   );

@@ -111,12 +111,13 @@ export function StudentDashboardOverview() {
     );
   }
 
+  const now = Date.now();
   const upcoming =
     (bookings ?? [])
       .filter((b) => b.status === "confirmed")
       .filter((b) => {
         const start = new Date(`${b.date}T${b.startTime}:00Z`).getTime();
-        return Number.isFinite(start) ? start > Date.now() : true;
+        return Number.isFinite(start) ? start > now : true;
       })
       .slice(0, 3) ?? [];
 

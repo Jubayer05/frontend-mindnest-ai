@@ -144,7 +144,7 @@ export function TutorAvailabilityCalendar({ tutorUserId }: { tutorUserId: string
       <div className="rounded-xl border border-dashed border-red-200 bg-red-50/50 px-4 py-6 text-center">
         <p className="text-destructive text-[13px]">{error}</p>
         <Button asChild variant="outline" size="sm" className="mt-3">
-          <Link href={`/tutors/${encodeURIComponent(tutorUserId)}/slots`}>
+          <Link href={`/coaches/${encodeURIComponent(tutorUserId)}/slots`}>
             View slots page
           </Link>
         </Button>
@@ -161,7 +161,7 @@ export function TutorAvailabilityCalendar({ tutorUserId }: { tutorUserId: string
           This tutor has no bookable sessions in the future right now.
         </p>
         <Button asChild variant="outline" className="mt-5">
-          <Link href={`/tutors/${encodeURIComponent(tutorUserId)}/slots`}>
+          <Link href={`/coaches/${encodeURIComponent(tutorUserId)}/slots`}>
             Open full availability
           </Link>
         </Button>
@@ -319,7 +319,7 @@ export function TutorAvailabilityCalendar({ tutorUserId }: { tutorUserId: string
         {!selectedKey && upcoming.length > 8 ? (
           <div className="mt-4 text-center">
             <Button asChild variant="outline" size="sm">
-              <Link href={`/tutors/${encodeURIComponent(tutorUserId)}/slots`}>
+              <Link href={`/coaches/${encodeURIComponent(tutorUserId)}/slots`}>
                 See all slots
               </Link>
             </Button>

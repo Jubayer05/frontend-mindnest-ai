@@ -67,7 +67,7 @@ export function TutorAvailabilityHome() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const loadSlots = useCallback(() => {
-    if (!user || user.role !== "TUTOR") return;
+    if (!user || user.role !== "COACH") return;
     void listAvailabilitySlotsByTutor(user.id)
       .then((data) => {
         setSlots(data);
@@ -87,7 +87,7 @@ export function TutorAvailabilityHome() {
   }, [user]);
 
   useEffect(() => {
-    if (!user || user.role !== "TUTOR") {
+    if (!user || user.role !== "COACH") {
       queueMicrotask(() => {
         setSlots(null);
         setListError(null);
@@ -128,7 +128,7 @@ export function TutorAvailabilityHome() {
       });
   };
 
-  const wrongRole = user && user.role !== "TUTOR";
+  const wrongRole = user && user.role !== "COACH";
 
   return (
     <DashboardPageShell>
@@ -142,7 +142,7 @@ export function TutorAvailabilityHome() {
               asChild
               className="border-0 bg-amber-500 text-[#0f1f3d] shadow-sm hover:bg-amber-400"
             >
-              <Link href="/tutor/availability/new">New slot</Link>
+              <Link href="/coach/availability/new">New slot</Link>
             </Button>
           }
         />
@@ -214,7 +214,7 @@ export function TutorAvailabilityHome() {
                         >
                           <TableCell className="truncate font-medium text-[#0f1f3d]">
                             <Link
-                              href={`/tutor/availability/${slot.id}`}
+                              href={`/coach/availability/${slot.id}`}
                               className="block truncate hover:underline"
                             >
                               {slot.name.trim() ? (

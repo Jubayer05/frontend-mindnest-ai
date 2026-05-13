@@ -3,7 +3,7 @@ import type {
   AvailabilitySlotStatus,
 } from "@/types/availability";
 
-const STORAGE_KEY = "skillbridge-tutor-recent-availability-slots";
+const STORAGE_KEY = "mindnest-coach-recent-availability-slots";
 const MAX_ENTRIES = 30;
 
 export type RecentAvailabilitySlotRef = Pick<

@@ -81,7 +81,7 @@ export function TutorAvailabilitySlotDetail({ slotId }: { slotId: string }) {
       .then(() => {
         forgetAvailabilitySlotId(slotId);
         toast.success("Slot deleted");
-        router.push("/tutor/availability");
+        router.push("/coach/availability");
       })
       .catch((err: Error) => {
         toast.error(err.message ?? "Could not delete slot");
@@ -113,7 +113,7 @@ export function TutorAvailabilitySlotDetail({ slotId }: { slotId: string }) {
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline" className="border-[#e4e1d8]">
-              <Link href="/tutor/availability">Back to availability</Link>
+              <Link href="/coach/availability">Back to availability</Link>
             </Button>
           </CardContent>
         </Card>
@@ -131,7 +131,7 @@ export function TutorAvailabilitySlotDetail({ slotId }: { slotId: string }) {
             size="sm"
             className="-ml-2 h-auto px-2 text-[#5c5a54] hover:text-[#0f1f3d]"
           >
-            <Link href="/tutor/availability">← Availability</Link>
+            <Link href="/coach/availability">← Availability</Link>
           </Button>
           <DashboardHero
             eyebrow="Slot detail"

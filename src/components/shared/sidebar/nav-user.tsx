@@ -98,19 +98,23 @@ export function NavUser({
             <DropdownMenuSeparator />
 
             <DropdownMenuGroup>
-              <Link href="/dashboard/profile">
-                <DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/profile">
                   <BadgeCheck />
-                  Account
-                </DropdownMenuItem>
-              </Link>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
+                  Profile
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/bookings">
+                  <CreditCard />
+                  Bookings
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/coaches">
+                  <Bell />
+                  Browse coaches
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

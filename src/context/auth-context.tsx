@@ -22,7 +22,7 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-const COOKIE_NAME = "skillbridge-user";
+const COOKIE_NAME = "mindnest-user";
 
 /** Fallback Max-Age when API does not return session.expiresAt (seconds). */
 const DEFAULT_MAX_AGE_SEC = 60 * 60 * 24 * 7;
@@ -193,7 +193,7 @@ function clearClientAuthState(reason: SessionEndReason) {
     reason === "expired" &&
     typeof window !== "undefined"
   ) {
-    window.dispatchEvent(new CustomEvent("skillbridge:session-expired"));
+    window.dispatchEvent(new CustomEvent("mindnest:session-expired"));
   }
 }
 

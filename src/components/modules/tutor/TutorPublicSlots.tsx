@@ -102,7 +102,7 @@ export function TutorPublicSlots({ tutorUserId }: { tutorUserId: string }) {
           <p className="text-destructive text-sm">{error}</p>
           <div className="flex flex-wrap justify-center gap-2">
             <Button asChild variant="outline">
-              <Link href="/tutors">Browse tutors</Link>
+              <Link href="/coaches">Browse tutors</Link>
             </Button>
             <Button asChild variant="outline">
               <Link href="/">Home</Link>
@@ -133,7 +133,7 @@ export function TutorPublicSlots({ tutorUserId }: { tutorUserId: string }) {
               size="sm"
               className="text-white/80 hover:bg-white/10 hover:text-white"
             >
-              <Link href="/tutors" className="gap-2">
+              <Link href="/coaches" className="gap-2">
                 <ArrowLeft className="size-4" />
                 All tutors
               </Link>
@@ -145,7 +145,7 @@ export function TutorPublicSlots({ tutorUserId }: { tutorUserId: string }) {
               className="text-white/80 hover:bg-white/10 hover:text-white"
             >
               <Link
-                href={`/tutors/${encodeURIComponent(tutorUserId)}`}
+                href={`/coaches/${encodeURIComponent(tutorUserId)}`}
                 className="gap-2"
               >
                 Profile & reviews
@@ -205,7 +205,7 @@ export function TutorPublicSlots({ tutorUserId }: { tutorUserId: string }) {
               className="shrink-0 bg-amber-400 font-semibold text-[#0f1f3d] shadow-sm hover:bg-amber-300"
             >
               <Link
-                href={`/tutors/${encodeURIComponent(tutorUserId)}`}
+                href={`/coaches/${encodeURIComponent(tutorUserId)}`}
                 className="gap-2"
               >
                 <CalendarDays className="size-4" />
@@ -242,7 +242,7 @@ export function TutorPublicSlots({ tutorUserId }: { tutorUserId: string }) {
               again later or browse other tutors.
             </p>
             <Button asChild className="mt-6" variant="outline">
-              <Link href="/tutors">Browse tutors</Link>
+              <Link href="/coaches">Browse tutors</Link>
             </Button>
           </div>
         ) : (

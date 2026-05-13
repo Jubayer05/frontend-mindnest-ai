@@ -29,7 +29,7 @@ export function AuthSidePanel({ title, description }: AuthSidePanelProps) {
         {/* Logo badge */}
         <div className="rounded-2xl bg-white/10 px-5 py-3 ring-1 ring-white/20 backdrop-blur-sm">
           <p className="text-xl font-bold tracking-wide text-white">
-            SkillBridge
+            MindNest AI
           </p>
           <p className="text-xs font-medium tracking-[0.15em] text-white/60 uppercase mt-0.5">
             Learn · Build · Grow
